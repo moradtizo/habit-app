@@ -1,35 +1,49 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+import { Tabs } from "expo-router";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+export default function TabsLayout() {
+  return <Tabs screenOptions={{
+    headerStyle:{backgroundColor:"#f5f5f5"},
+    headerShadowVisible:false,
+    tabBarStyle:{
+      backgroundColor:"#f5f5f5",
+      borderTopWidth:0,
+      elevation:0,
+      shadowOpacity:0,
+    },
+    tabBarActiveTintColor:"red",
+    tabBarInactiveTintColor:"#666666", 
+    }}>
+    <Tabs.Screen 
+    name="index" 
+    options={{ 
+      title:"today habit" ,
+       tabBarIcon:({color,size})=>(
+       <MaterialCommunityIcons name="calendar-today" size={size} color={color} />
+      ),
+       }}
+       />
+    <Tabs.Screen 
+    name="streaks" 
+    options={{ 
+      title:"streaks" ,
+       tabBarIcon:({color,size})=>(
+       <MaterialCommunityIcons 
+      name="chart-line"
+      size={size} color={color} />
+      ),
+       }}
+       />
+       <Tabs.Screen 
+    name="add-habit" 
+    options={{ 
+      title:"add habit" ,
+       tabBarIcon:({color,size})=>(
+       <MaterialCommunityIcons name="plus-circle" size={size} color={color} />
+      ),
+       }}
+       />
+  </Tabs>;
 }
+  
