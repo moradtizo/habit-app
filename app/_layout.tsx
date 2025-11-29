@@ -22,8 +22,12 @@ function RouteGuard({ children }: RouteGuardProps) {
 
   useEffect(() => {
     if (isLoadingUser) return; // Wait for auth check to complete
-    
+
     const isAuthGroup = segments[0] === "auth";
+    const isSplashScreen = segments[0] === "SplashScreen";
+
+    // Don't redirect if on splash screen
+    if (isSplashScreen) return;
 
     if (!user && !isAuthGroup) {
       router.replace("/auth");
@@ -40,10 +44,11 @@ export default function RootLayout() {
       <PaperProvider>
         <SafeAreaProvider>
           <RouteGuard>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="auth" options={{ headerShown: false }} />
-            </Stack>
+          <Stack initialRouteName="SplashScreen">
+            <Stack.Screen name="SplashScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="auth" options={{ headerShown: false }} />
+          </Stack>
           </RouteGuard>
         </SafeAreaProvider>
       </PaperProvider>
